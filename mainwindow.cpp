@@ -73,7 +73,7 @@ void MainWindow::on_pushButton_clicked()
     DS.filled=true;
     DS.thickness=25;
     for (const auto &i:outLines){
-        if ((abs(i.a/i.b) > 0.95) && (abs(i.a/i.b) < 1.3) )
+        if ((abs(i.a/i.b) > 0.9) && (abs(i.a/i.b) < 1.3) )
             avl::DrawLine(image1,i,atl::NIL,pix,DS);
     }
     avl::SaveImage(cut,atl::NIL,"x.jpg",0);
