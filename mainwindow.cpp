@@ -79,6 +79,7 @@ void MainWindow::on_pushButton_clicked()
     avl::SaveImage(cut,atl::NIL,"x.jpg",0);
     avl::SaveImage(image1,atl::NIL,"result.jpg",0);
 
+    //Output to labeb
     QPixmap mp("result.jpg");
 
     ui->label->setPixmap(mp);
