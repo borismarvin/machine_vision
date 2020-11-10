@@ -7,6 +7,7 @@
 #define PI 3.14159265
 
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -23,10 +24,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    avl::Image image1,dark_image,image_sum,sum_dark,filtered_image,CannyEdges;
+    avl::Image image1,dark_image,image_sum,sum_dark,filtered_image,CannyEdges,image2,channel1,channel2,channel3;;
     //Load test image
     avl::LoadImage("road lines1.jpg",false,image1);
-    avl::Image image2,channel1,channel2,channel3;
     avl::AverageChannels(image1,atl::NIL,image2);
     avl::Image yellow,white;
     //select yellow mask
@@ -73,13 +73,13 @@ void MainWindow::on_pushButton_clicked()
     DS.filled=true;
     DS.thickness=25;
     for (const auto &i:outLines){
-        if ((abs(i.a/i.b) > 0.9) && (abs(i.a/i.b) < 1.3) )
+        if ((abs(i.a/i.b) > 0.95) && (abs(i.a/i.b) < 1.3) )
             avl::DrawLine(image1,i,atl::NIL,pix,DS);
     }
     avl::SaveImage(cut,atl::NIL,"x.jpg",0);
     avl::SaveImage(image1,atl::NIL,"result.jpg",0);
 
-    //Output to labeb
+    //Output to label
     QPixmap mp("result.jpg");
 
     ui->label->setPixmap(mp);
@@ -89,5 +89,16 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    //close
    this->close();
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    //Load test image
+    QPixmap mp("road lines1.jpg");
+
+    ui->label->setPixmap(mp);
+
+    ui->label->setScaledContents(true);
 }
